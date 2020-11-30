@@ -6,7 +6,7 @@ RUN dnf install -y --nodocs --setopt=install_weak_deps=False \
                 bison git-core gcc make rubygem-asciidoctor && \
         dnf -y clean all
 
-RUN git clone https://git.tuxfamily.org/chrony/chrony.git
+RUN git clone https://github.com/mlichvar/chrony.git
 
 RUN cd chrony && \
         ./configure --enable-debug --enable-scfilter --prefix=/usr && \
@@ -25,5 +25,5 @@ RUN chmod 640 /etc/chrony/server.key /etc/chrony/server.crt
 RUN chown -R root /etc/chrony/server.key /etc/chrony/server.crt
 
 USER 0
-CMD ["/usr/sbin/chronyd", "-x", "-d", "-F", "1"]
+CMD ["/usr/sbin/chronyd", "-x", "-d", "-d", "-F", "1"]
 
